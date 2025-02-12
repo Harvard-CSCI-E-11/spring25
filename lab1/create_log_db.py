@@ -41,3 +41,5 @@ if __name__=="__main__":
                             (time_t, user, host, port))
     con.commit()
     con.close()
+python3 make_log_database.py
+ls -l logs.db
