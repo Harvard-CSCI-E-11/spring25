@@ -242,9 +242,9 @@ def init_app(app):
                     db.execute("UPDATE images set celeb_json=? where s3key=?",
                                (json.dumps(celeb),row['s3key']))
                     db.commit()
-                except rekognition.exceptions.InvalidS3ObjectException as e:
-                    current_app.logger.error("InvalidS3ObjectException: %s. Deleting %s",e,row['s3key'])
-                    db.execute("DELETE from images where s3key=?", (row['s3key']))
+                except Exception as e:
+                    current_app.logger.error("recognize_celebrities exception: %s. Deleting %s",e,row['s3key'])
+                    db.execute("DELETE from images where s3key=?", (row['s3key'],))
                     db.commit()
                     continue
             row['celeb'] = celeb
